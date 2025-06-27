@@ -60,7 +60,7 @@ class EventRepository implements Events {
   @override
   Future<void> createEvent({
     required String name,
-    required String description,
+    String? description,
     required String type,
     required DateTime dateTime,
     String? attachment,
