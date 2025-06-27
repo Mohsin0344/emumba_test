@@ -1,14 +1,14 @@
   import '../models/model.dart';
 
-abstract class Event {
+abstract class Events {
     Future getEvents();
   }
 
-  class EventRepository implements Event {
+  class EventRepository implements Events {
     @override
-    Future<List<TableEvent>> getEvents() async {
+    Future<List<Event>> getEvents() async {
       try {
-        final events = await TableEvent().select().toList();
+        final events = await Event().select().toList();
         return events;
       } catch (e) {
         throw Exception('Failed to fetch events: $e');
