@@ -23,6 +23,8 @@ abstract class Events {
   });
 
   Future<void> deleteEvent(int id);
+
+  Future<List<Event>> getEventsByType(String type);
 }
 
 class EventRepository implements Events {
@@ -127,6 +129,20 @@ class EventRepository implements Events {
       }
     } catch (e) {
       throw Exception('Failed to delete event: $e');
+    }
+  }
+
+  @override
+  Future<List<Event>> getEventsByType(String type) async {
+    try {
+      final events = await Event()
+          .select()
+          .type
+          .equals(type)
+          .toList();
+      return events;
+    } catch (e) {
+      throw Exception('Failed to fetch events by type: $e');
     }
   }
 }
