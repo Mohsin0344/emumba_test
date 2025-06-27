@@ -11,10 +11,10 @@ class GetEventsViewModel extends Cubit<AppState> {
   getEvents() async {
     try {
       emit(const LoadingState());
-      final model = await _eventRepository.getEvents();
+      final events = await _eventRepository.getEvents();
       emit(
         SuccessState(
-          data: model,
+          data: events,
         ),
       );
     } catch (e) {
