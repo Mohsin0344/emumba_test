@@ -17,8 +17,8 @@ class DeleteEventViewModel extends Cubit<AppState> {
         eventId,
       );
       emit(
-        SuccessState(
-          data: event,
+        const SuccessState(
+          data: 'Event Deleted',
         ),
       );
     } catch (e) {

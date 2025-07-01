@@ -13,20 +13,20 @@ class UpdateEventViewModel extends Cubit<AppState> {
     required String name,
     String? description,
     required String type,
-    required DateTime createdAt,
+    required DateTime dateTime,
   }) async {
     try {
       emit(const LoadingState());
-      final event = await _eventRepository.updateEvent(
+      await _eventRepository.updateEvent(
         id: eventId,
         name: name,
         description: description,
         type: type,
-        dateTime: createdAt,
+        dateTime: dateTime,
       );
       emit(
-        SuccessState(
-          data: event,
+        const SuccessState(
+          data: 'Event updated successfully',
         ),
       );
     } catch (e) {

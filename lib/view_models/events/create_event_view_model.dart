@@ -16,15 +16,15 @@ class CreateEventViewModel extends Cubit<AppState> {
   }) async {
     try {
       emit(const LoadingState());
-      final event = await _eventRepository.createEvent(
+      await _eventRepository.createEvent(
         name: name,
         description: description,
         type: type,
         dateTime: createdAt,
       );
       emit(
-        SuccessState(
-          data: event,
+        const SuccessState(
+          data: 'Event created Successfully',
         ),
       );
     } catch (e) {
