@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_fonts.dart';
 import '../../../view_models/nav_bar/nav_bar_view_model.dart';
+import 'events/events_list_view_screen.dart';
 
 class HomeBaseScreen extends StatefulWidget {
   const HomeBaseScreen({super.key});
@@ -16,18 +17,8 @@ class HomeBaseScreen extends StatefulWidget {
 class _HomeBaseScreenState extends State<HomeBaseScreen> {
   late NavBarViewModel navBarViewModel;
 
-  List navBarItemTitles = [
-    'List View',
-    'Calendar View',
-  ];
-
-  List navBarIcons = [
-    Icons.list,
-    Icons.calendar_month,
-  ];
-
   final List<Widget> _screens = [
-    const SizedBox(),
+    const EventsListViewScreen(),
     const SizedBox(),
   ];
 
@@ -76,14 +67,14 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: List.generate(
-                    navBarItemTitles.length,
+                    navBarViewModel.navBarItemTitles.length,
                     (index) => navbarItem(
-                      title: navBarItemTitles[index],
+                      title: navBarViewModel.navBarItemTitles[index],
                       isActive: index == tabIndex,
                       onTap: () => navBarViewModel.changeTap(
                         tabIndex: index,
                       ),
-                      icon: navBarIcons[index],
+                      icon: navBarViewModel.navBarIcons[index],
                     ),
                   ),
                 );
