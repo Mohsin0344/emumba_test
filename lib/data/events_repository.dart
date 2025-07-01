@@ -28,7 +28,6 @@ abstract class Events {
 }
 
 class EventRepository implements Events {
-
   @override
   Future<List<Event>> getEvents({
     String? type,
@@ -51,11 +50,9 @@ class EventRepository implements Events {
 
       return await query.toList();
     } catch (e) {
-      throw Exception('Failed to fetch events: $e');
+      throw CustomException('Failed to fetch events: $e');
     }
   }
-
-
 
   // Get events on a specific date
   @override
@@ -72,7 +69,7 @@ class EventRepository implements Events {
 
       return events;
     } catch (e) {
-      throw Exception('Failed to fetch events by date: $e');
+      throw CustomException('Failed to fetch events by date: $e');
     }
   }
 
@@ -86,7 +83,7 @@ class EventRepository implements Events {
     String? attachment,
   }) async {
     if (dateTime.isBefore(DateTime.now())) {
-      throw Exception('Event date must be in the future.');
+      throw CustomException('Event date must be in the future.');
     }
 
     final event = Event()
@@ -99,7 +96,7 @@ class EventRepository implements Events {
     try {
       await event.save();
     } catch (e) {
-      throw Exception('Failed to create event: $e');
+      throw CustomException('Failed to create event: $e');
     }
   }
 
@@ -116,11 +113,11 @@ class EventRepository implements Events {
     try {
       final event = await Event().getById(id);
       if (event == null) {
-        throw Exception('Event not found');
+        throw CustomException('Event not found');
       }
 
       if (dateTime != null && dateTime.isBefore(DateTime.now())) {
-        throw Exception('Event date must be in the future.');
+        throw CustomException('Event date must be in the future.');
       }
 
       event
@@ -132,7 +129,7 @@ class EventRepository implements Events {
 
       await event.save();
     } catch (e) {
-      throw Exception('Failed to update event: $e');
+      throw CustomException('Failed to update event: $e');
     }
   }
 
@@ -143,24 +140,28 @@ class EventRepository implements Events {
       if (event != null) {
         await event.delete();
       } else {
-        throw Exception('Event not found');
+        throw CustomException('Event not found');
       }
     } catch (e) {
-      throw Exception('Failed to delete event: $e');
+      throw CustomException('Failed to delete event: $e');
     }
   }
 
   @override
   Future<List<Event>> getEventsByType(String type) async {
     try {
-      final events = await Event()
-          .select()
-          .type
-          .equals(type)
-          .toList();
+      final events = await Event().select().type.equals(type).toList();
       return events;
     } catch (e) {
-      throw Exception('Failed to fetch events by type: $e');
+      throw CustomException('Failed to fetch events by type: $e');
     }
   }
+}
+
+class CustomException implements Exception {
+  final String message;
+
+  CustomException(
+    this.message,
+  );
 }

@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:emumba_test/view_models/view_model_exception_handler.dart';
 
 import '../../data/events_repository.dart';
 import '../app_states.dart';
 
-class GetEventsViewModel extends Cubit<AppState> {
+class GetEventsViewModel extends Cubit<AppState> with ViewModelExceptionHandler {
   final EventRepository _eventRepository;
 
   GetEventsViewModel(this._eventRepository) : super(const InitialState());
@@ -23,11 +24,7 @@ class GetEventsViewModel extends Cubit<AppState> {
         ),
       );
     } catch (e) {
-      emit(
-        UnknownErrorState(
-          error: e.toString(),
-        ),
-      );
+      handleException(e);
     }
   }
 }
