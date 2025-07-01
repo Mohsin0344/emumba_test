@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_routes/routes.dart';
 import 'providers/bloc_providers.dart';
+import 'views/app_theme.dart';
 
 void main() {
   runApp(const MyHomePage());
@@ -31,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
             key: navigatorKey,
             debugShowCheckedModeBanner: false,
             title: '',
+            theme: customTheme(),
             onGenerateRoute: AppRoutes.generateRoute,
             builder: (context, child) {
               return MediaQuery(
