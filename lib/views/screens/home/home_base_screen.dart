@@ -1,8 +1,12 @@
+import 'package:emumba_test/data/events_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../app_routes/app_route_model/manage_event_route_model.dart';
+import '../../../app_routes/route_names.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_fonts.dart';
+import '../../../view_models/events/get_events_view_model.dart';
 import '../../../view_models/nav_bar/nav_bar_view_model.dart';
 import 'events/events_calendar_screen.dart';
 import 'events/events_list_view_screen.dart';
@@ -16,6 +20,7 @@ class HomeBaseScreen extends StatefulWidget {
 
 class _HomeBaseScreenState extends State<HomeBaseScreen> {
   late NavBarViewModel navBarViewModel;
+  late GetEventsViewModel getEventsViewModel;
 
   final List<Widget> _screens = [
     const EventsListViewScreen(),
@@ -30,6 +35,7 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
 
   initViewModels() {
     navBarViewModel = context.read<NavBarViewModel>();
+    getEventsViewModel = context.read<GetEventsViewModel>();
   }
 
   @override
@@ -71,9 +77,14 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
                     (index) => navbarItem(
                       title: navBarViewModel.navBarItemTitles[index],
                       isActive: index == tabIndex,
-                      onTap: () => navBarViewModel.changeTap(
-                        tabIndex: index,
-                      ),
+                      onTap: () {
+                        getEventsViewModel.selectedDateTime = null;
+                        getEventsViewModel.selectedEventType = null;
+                        getEventsViewModel.getEvents();
+                        navBarViewModel.changeTap(
+                          tabIndex: index,
+                        );
+                      },
                       icon: navBarViewModel.navBarIcons[index],
                     ),
                   ),
@@ -85,7 +96,13 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(
+          context,
+          RouteNames.manageEventScreen,
+          arguments: const ManageEventRouteModel(
+            event: null,
+          ),
+        ),
         child: const Icon(
           Icons.add,
           color: AppColors.secondaryColor,
