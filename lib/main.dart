@@ -1,4 +1,4 @@
-import 'package:emumba_test/views/screens/home_screen.dart';
+import 'package:emumba_test/views/screens/home/home_base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
