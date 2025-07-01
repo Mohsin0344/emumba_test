@@ -5,13 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 class AppFonts {
   static bodyFont(
       {var color,
-        var fontSize,
-        var fontWeight,
-        var fontStyle,
-        var letterSpacing,
-        var height,
-        var decoration,
-        Color? decorationColor}) {
+      var fontSize,
+      var fontWeight,
+      var fontStyle,
+      var letterSpacing,
+      var height,
+      var decoration,
+      Color? decorationColor}) {
     return GoogleFonts.poppins(
       height: height,
       color: color,

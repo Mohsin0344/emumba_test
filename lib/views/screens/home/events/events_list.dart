@@ -1,6 +1,7 @@
 import 'package:emumba_test/utils/app_extension_methods.dart';
 import 'package:emumba_test/utils/app_fonts.dart';
 import 'package:emumba_test/view_models/events/delete_event_view_model.dart';
+import 'package:emumba_test/views/widgets/views_exception_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,17 +55,20 @@ class _EventsListState extends State<EventsList> {
               if (deleteState is SuccessState) {
                 getEventsViewModel.getEvents();
               }
+              errorHandler(context: context, state: deleteState);
             },
           ),
           BlocListener<GetEventsViewModel, AppState>(
-            listener: (context, state) {},
+            listener: (context, eventsState) {
+              errorHandler(context: context, state: eventsState);
+            },
           )
         ],
         child: BlocBuilder<GetEventsViewModel, AppState>(
           builder: (context, eventsState) {
             if (eventsState is SuccessState<List<Event>>) {
               List<Event> events = eventsState.data;
-              if(events.isEmpty) {
+              if (events.isEmpty) {
                 return const SliverToBoxAdapter(
                   child: Center(
                     child: Text(

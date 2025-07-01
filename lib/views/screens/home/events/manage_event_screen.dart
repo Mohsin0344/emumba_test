@@ -1,4 +1,5 @@
 import 'package:emumba_test/views/widgets/app_snack_bar.dart';
+import 'package:emumba_test/views/widgets/views_exception_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,14 +70,16 @@ class _ManageEventScreenState extends State<ManageEventScreen> {
               getEventsViewModel.getEvents();
               Navigator.pop(context);
             }
+            errorHandler(context: context, state: eventState);
           },
         ),
         BlocListener<UpdateEventViewModel, AppState>(
           listener: (context, updateState) {
-            if(updateState is SuccessState) {
+            if (updateState is SuccessState) {
               getEventsViewModel.getEvents();
               Navigator.pop(context);
             }
+            errorHandler(context: context, state: updateState);
           },
         )
       ],
@@ -189,12 +192,14 @@ class _ManageEventScreenState extends State<ManageEventScreen> {
                               if (!_formKey.currentState!.validate()) return;
 
                               if (selectedEventType == null) {
-                                showCustomSnackBar(context, 'Select event type');
+                                showCustomSnackBar(
+                                    context, 'Select event type');
                                 return;
                               }
 
                               final name = nameController.text.trim();
-                              final description = descriptionController.text.trim();
+                              final description =
+                                  descriptionController.text.trim();
                               final dateTime = selectedDateTime!;
 
                               if (widget.event != null) {

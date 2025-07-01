@@ -41,7 +41,7 @@ class _EventsListViewScreenState extends State<EventsListViewScreen> {
               onEventSelected: (selectedEvent) {
                 setState(() {
                   getEventsViewModel.selectedEventType =
-                  selectedEvent == 'All' ? null : selectedEvent;
+                      selectedEvent == 'All' ? null : selectedEvent;
                   getEventsViewModel.getEvents();
                 });
               },

@@ -15,7 +15,6 @@ class AppSliverBar extends StatefulWidget {
 class _AppSliverBarState extends State<AppSliverBar> {
   late NavBarViewModel navBarViewModel;
 
-
   @override
   void initState() {
     super.initState();

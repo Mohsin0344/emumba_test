@@ -4,7 +4,8 @@ import 'package:emumba_test/view_models/view_model_exception_handler.dart';
 import '../../data/events_repository.dart';
 import '../app_states.dart';
 
-class DeleteEventViewModel extends Cubit<AppState> with ViewModelExceptionHandler {
+class DeleteEventViewModel extends Cubit<AppState>
+    with ViewModelExceptionHandler {
   final EventRepository _eventRepository;
 
   DeleteEventViewModel(this._eventRepository) : super(const InitialState());

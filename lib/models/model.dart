@@ -5,6 +5,7 @@ import 'package:sqfentity/sqfentity.dart';
 import 'package:sqfentity_gen/sqfentity_gen.dart';
 import 'package:http/http.dart' as http;
 part 'model.g.dart';
+
 // Define Table for Events
 const tableEvents = SqfEntityTable(
   tableName: 'events',

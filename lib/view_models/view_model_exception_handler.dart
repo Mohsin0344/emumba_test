@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 mixin ViewModelExceptionHandler<T> on Cubit<T> {
   handleException(Object e) {
-    if(e is CustomException) {
+    if (e is CustomException) {
       emit(UnknownErrorState(error: e.message) as T);
     }
   }

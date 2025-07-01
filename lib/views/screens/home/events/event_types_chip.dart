@@ -32,13 +32,14 @@ class _EventTypesChipState extends State<EventTypesChip> {
     return Wrap(
       spacing: 10.h,
       children: [
-        if(widget.showAllType) eventTypeChip(
-          isSelected: widget.selectedType == 'All',
-          eventType: 'All',
-          onTap: () {
-            widget.onEventSelected('All');
-          },
-        ),
+        if (widget.showAllType)
+          eventTypeChip(
+            isSelected: widget.selectedType == 'All',
+            eventType: 'All',
+            onTap: () {
+              widget.onEventSelected('All');
+            },
+          ),
         ...List.generate(
           eventTypes.length,
           (index) => eventTypeChip(

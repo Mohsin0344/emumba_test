@@ -71,9 +71,6 @@ final class PermissionPermanentlyDeniedState extends AppState {
   const PermissionPermanentlyDeniedState();
 }
 
-
 final class AccessDeniedError extends AppState {
   const AccessDeniedError();
 }
-
-

@@ -15,7 +15,6 @@ class EventsCalendarScreen extends StatefulWidget {
 class _EventsCalendarScreenState extends State<EventsCalendarScreen> {
   late GetEventsViewModel getEventsViewModel;
 
-
   @override
   void initState() {
     super.initState();
@@ -25,7 +24,6 @@ class _EventsCalendarScreenState extends State<EventsCalendarScreen> {
   initViewModels() {
     getEventsViewModel = context.read<GetEventsViewModel>();
   }
-
 
   @override
   Widget build(BuildContext context) {

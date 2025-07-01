@@ -168,7 +168,7 @@ ThemeData customTheme() {
     unselectedWidgetColor: AppColors.blackColor,
     checkboxTheme: CheckboxThemeData(
       fillColor:
-      WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
         if (states.contains(WidgetState.selected)) {
           return AppColors.primaryColor; // Checkbox color when selected
         }
@@ -177,7 +177,7 @@ ThemeData customTheme() {
       checkColor: WidgetStateProperty.all(AppColors.secondaryColor),
       // Tick color when selected
       side: WidgetStateBorderSide.resolveWith(
-            (Set<WidgetState> states) {
+        (Set<WidgetState> states) {
           if (!states.contains(WidgetState.selected)) {
             return const BorderSide(
                 color: AppColors.blackColor); // Border color when not selected
@@ -211,7 +211,7 @@ ThemeData customTheme() {
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor:
-      AppColors.secondaryColor, // Set background color to white
+          AppColors.secondaryColor, // Set background color to white
       selectedItemColor: AppColors.primaryColor, // Selected item color
       unselectedItemColor: Colors.grey, // Unselected item color
       elevation: 10, // Optional: adds shadow
