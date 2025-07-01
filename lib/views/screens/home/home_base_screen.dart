@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_fonts.dart';
 import '../../../view_models/nav_bar/nav_bar_view_model.dart';
+import 'events/events_calendar_screen.dart';
 import 'events/events_list_view_screen.dart';
 
 class HomeBaseScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
 
   final List<Widget> _screens = [
     const EventsListViewScreen(),
-    const SizedBox(),
+    const EventsCalendarScreen(),
   ];
 
   @override
@@ -81,6 +81,14 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
               },
             ),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primaryColor,
+        onPressed: () {},
+        child: const Icon(
+          Icons.add,
+          color: AppColors.secondaryColor,
         ),
       ),
     );
