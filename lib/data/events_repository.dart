@@ -28,16 +28,34 @@ abstract class Events {
 }
 
 class EventRepository implements Events {
-  // Get all events
+
   @override
-  Future<List<Event>> getEvents() async {
+  Future<List<Event>> getEvents({
+    String? type,
+    DateTime? date,
+  }) async {
     try {
-      final events = await Event().select().toList();
-      return events;
+      final query = Event().select();
+
+      if (type != null) {
+        query.type.equals(type);
+      }
+
+      if (date != null) {
+        // Assuming eventDateTime is the field in DB
+        final startOfDay = DateTime(date.year, date.month, date.day);
+        final endOfDay = startOfDay.add(const Duration(days: 1));
+
+        query.dateTime.between(startOfDay, endOfDay);
+      }
+
+      return await query.toList();
     } catch (e) {
       throw Exception('Failed to fetch events: $e');
     }
   }
+
+
 
   // Get events on a specific date
   @override
